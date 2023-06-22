@@ -7,8 +7,9 @@ import sv_ttk
 
 
 
-#-----------main--------
+#-----------Main--------
 #configuraçoes da janela
+
 
 root = tk.Tk()
 root.geometry("1200x700")
