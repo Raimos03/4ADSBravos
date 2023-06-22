@@ -14,6 +14,8 @@ def comparaS(s1,s2):
 
     return True
 
+
+
 #Teste ---- comparaS
 ''' 
 r=comparaS('Pedro','Pedro')
