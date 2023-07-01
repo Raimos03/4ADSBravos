@@ -1,17 +1,44 @@
+from conexaoBd import *
+con = connector.connect(host='localhost', database='brutus', user='root', password='')
 
-from tkinter import * #importando a biblioteca
+def pesquisar_no_banco_dados(modelo, chassi, cor, km, preco, ano):
+    # Criação do cursor para executar comandos SQL
+    cursor = con.cursor()
 
+    # Construção da consulta SQL com base nos campos preenchidos
+    consulta = "SELECT * FROM carros WHERE 1=1"
+    valores = []
 
-#passar para tkinter puro ou ttk 
+    if modelo:
+        consulta += " AND modelo = %s"
+        valores.append(modelo)
+    if chassi:
+        consulta += " AND chassi = %s"
+        valores.append(chassi)
+    if cor:
+        consulta += " AND cor = %s"
+        valores.append(cor)
+    if km:
+        consulta += " AND km = %s"
+        valores.append(km)
+    if preco:
+        consulta += " AND preco = %s"
+        valores.append(preco)
+    if ano:
+        consulta += " AND ano = %s"
+        valores.append(ano)
 
-# janela = customtkinter.CTk()
+    # Execução da consulta no banco de dados
+    cursor.execute(consulta, valores)
 
-# janela.title("BRUTUS - CONSULTA ESTOQUE")
-# janela.iconbitmap("")
+    # Obter os resultados da consulta
+    resultados = cursor.fetchall()
 
+    # Fechamento do cursor e da conexão com o banco de dados
+    cursor.close()
+    con.close()
 
+    # Exibir os resultados em uma nova janela
+    return resultados
 
-# entrada1 = customtkinter.CTkEntry(master=janela, placeholder_text="Pesquisar modelo", width=300).place(x=10,y=25)
-
-# butao = customtkinter.CTkButton(master=janela, text="Buscar", width=100).place(x=320, y=25)
 

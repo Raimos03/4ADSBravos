@@ -1,18 +1,14 @@
 from view import*
-from login import* 
-from consulta import* 
-import conexaoBd
-
-
 
 def IniciaApp(r):
 
-    # funcao de login
+    #Login(r)
+    janelaPrincipal(r)
+    #vConsultaCarros(r)
+    #vCadastroCarro(r)
+    #vConsultaClientes(r)
+    #vCadastroCliente(r)
     
-    # funcao de consulta
-    
-    FrameMenu(r)
-
     return 
 
     
