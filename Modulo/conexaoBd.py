@@ -1,8 +1,9 @@
-import mysql.connector
+from mysql import connector
 
 #Conexão com o banco 
-con = mysql.connector.connect(host='localhost', database='brutus', user='root', password='')
+con = connector.connect(host='localhost', database='brutus', user='root', password='')
 #Verificando conexão
+
 if con.is_connected():
     db_info = con.get_server_info()
     print("Conectado com sucesoo")

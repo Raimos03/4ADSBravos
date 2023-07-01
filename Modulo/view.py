@@ -3,11 +3,41 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 import sv_ttk
+import login
+
+
+def vConsulta():
+
+
+    return 
+
+def vLogin():
+
+
+    return 
+
+def vCadastro():
+
+
+    return
+
+def vVenda():
+
+    return 
+
+ 
+def vRelatorio():
+
+    return 
+
+def FrameMenu(pai): #principal gerenciador da view
 
 
 
-def FrameMenu( pai):
+    vLogin(pai)
 
+    return
+'''
     fr1= tk.Frame(master=pai,height=50,width=100,bg="blue")
     fr1.pack()
 
@@ -16,6 +46,13 @@ def FrameMenu( pai):
 
     fr3= tk.Frame(master=pai,bg="orange")
     fr3.place(x=50,y=100,height=200,width=500)
+
+    button = ttk.Button(pai,text="CLique")
+    button.pack()
+   
+'''
+
+
                                     
     # s1=ttk.Style()
     # s1.configure('NAME.TFrame',background="#E61E50")
@@ -23,9 +60,8 @@ def FrameMenu( pai):
     # fr2.place( x=10, y=10)
     # fr2.pack()
 
-    button = ttk.Button(pai,text="CLique")
-    button.pack()
-    return 
+   
+
 
 
 
