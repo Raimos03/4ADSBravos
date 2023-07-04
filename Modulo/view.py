@@ -5,9 +5,14 @@ from tkinter import ttk
 from tkinter import messagebox
 import sv_ttk
 from consulta import *
-
+import constantes as const
 
 from mysql import connector
+
+def vVendas(root): #colcoar aqui a tela Thiago
+    
+
+    return 
 
 def vConsultaCarros(root):
 
@@ -48,6 +53,8 @@ def vConsultaCarros(root):
             label_detalhes = Label(frame_registro, text=detalhes_registro)
             label_detalhes.pack(side=LEFT)
         
+
+
 
     #Definindo nova janela TopLevel
     janelaConsulta = Toplevel(root)
@@ -93,11 +100,11 @@ def vConsultaCarros(root):
     entry_ano.pack()
 
     # Botão de pesquisa
-    button_pesquisar = Button(janelaConsulta, text="Pesquisar", command=pesquisar)
+    button_pesquisar = Button(janelaConsulta, text="Pesquisar", command=pesquisar) #clique no botao executa
     button_pesquisar.pack()
 
     # Iniciar a janela principal
-    root.mainloop()
+    #root.mainloop()
     return 
 
 def vConsultaClientes(root):
@@ -168,7 +175,7 @@ def vConsultaClientes(root):
     button_pesquisar.pack()
 
     # Iniciar a janela principal
-    root.mainloop()
+    #root.mainloop()
     return 
 
 def vLogin(root):
@@ -201,8 +208,8 @@ def vLogin(root):
     label_result.pack()
 
     # Iniciar a janela principal
-    root.mainloop()
-    return 
+    #root.mainloop()
+    return [login, senha]
 
 def vCadastroCliente(root):
 
@@ -272,7 +279,8 @@ def vCadastroCliente(root):
     button_cadastrar.pack()
 
     # Iniciar a janela principal
-    root.mainloop()
+    #root.mainloop()
+
 
     return
 
@@ -282,8 +290,8 @@ def vCadastroCarro(root):
     janelaConsulta = Toplevel(root)
     janelaConsulta.grab_set()
     janelaConsulta.title("BRUTUS - Cadastro de veículos")
-    janelaConsulta.geometry("1200x700")
-    janelaConsulta.resizable(False,False)
+    #janelaConsulta.geometry("1200x700")
+    #janelaConsulta.resizable(False,False)
 
     # Label e campo de entrada para nome
     label_nome = Label(janelaConsulta, text="Modelo:")
@@ -326,11 +334,12 @@ def vCadastroCarro(root):
     button_cadastrar.pack()
 
     # Iniciar a janela principal
-    root.mainloop()
+    #root.mainloop()
 
     return
 
 def janelaPrincipal(root):
+
 
     def consultarClientes():
         # Lógica para abrir a janela de consulta de clientes
@@ -356,12 +365,14 @@ def janelaPrincipal(root):
     def exibir_opcao(opcao):
         label_opcao.config(text=f"Opção selecionada: {opcao}")
 
+
     # Barra de navegação
     menu_bar = Menu(root)
 
-    imagem = PhotoImage(file="img\logo.png")  
+    #imagem = PhotoImage(file="img/logo.ico")  
     # Criar um widget Label com a imagem como fundo
-    label_fundo = Label(root, image=imagem)
+    #label_fundo = Label(root, image=imagem)
+    label_fundo = Label(root)
     label_fundo.pack(anchor=CENTER)
 
 
@@ -383,10 +394,26 @@ def janelaPrincipal(root):
     label_opcao.pack()
 
     # Iniciar a janela principal
-    root.mainloop()
+    #root.mainloop()
 
     return
 
+
+
+
+def MainView(root):
+
+
+    print("Tela de Login criada : 1")
+    login,senha=vLogin(root)
+    const.inputLogin = login
+    const.inputSenha = senha
+    const.usuarioAut=ctlrLoginESenha(login,senha)
+    
+
+
+
+    return 
 
 
 

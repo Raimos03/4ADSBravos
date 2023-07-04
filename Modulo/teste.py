@@ -21,49 +21,52 @@ def exibir_resultados(resultados):
     else:
             print("Nenhum resultado encontrado.")
 
-modelo = ""
-chassi = ""
-cor = "Branco"
-km = 0
-preco = 0
-ano = 0
+# modelo = ""
+# chassi = ""
+# cor = "Branco"
+# km = 0
+# preco = 0
+# ano = 0
 
-# Criação do cursor para executar comandos SQL
-cursor = con.cursor()
+# # Criação do cursor para executar comandos SQL
+# cursor = con.cursor()
 
- # Construção da consulta SQL com base nos campos preenchidos
-consulta = "SELECT * FROM carros WHERE 1=1"
-valores = []
+#  # Construção da consulta SQL com base nos campos preenchidos
+# consulta = "SELECT * FROM carros WHERE 1=1"
+# valores = []
 
-if modelo:
-    consulta += " AND modelo = %s"
-    valores.append(modelo)
-if chassi:
-    consulta += " AND chassi = %s"
-    valores.append(chassi)
-if cor:
-    consulta += " AND cor = %s"
-    valores.append(cor)
-if km:
-    consulta += " AND km = %s"
-    valores.append(km)
-if preco:
-    consulta += " AND preco = %s"
-    valores.append(preco)
-if ano:
-    consulta += " AND ano = %s"
-    valores.append(ano)
+# if modelo:
+#     consulta += " AND modelo = %s"
+#     valores.append(modelo)
+# if chassi:
+#     consulta += " AND chassi = %s"
+#     valores.append(chassi)
+# if cor:
+#     consulta += " AND cor = %s"
+#     valores.append(cor)
+# if km:
+#     consulta += " AND km = %s"
+#     valores.append(km)
+# if preco:
+#     consulta += " AND preco = %s"
+#     valores.append(preco)
+# if ano:
+#     consulta += " AND ano = %s"
+#     valores.append(ano)
 
-# Execução da consulta no banco de dados
-cursor.execute(consulta, valores)
+# # Execução da consulta no banco de dados
+# cursor.execute(consulta, valores)
 
-# Obter os resultados da consulta
-resultados = cursor.fetchall()
+# # Obter os resultados da consulta
+# resultados = cursor.fetchall()
 
-# Fechamento do cursor e da conexão com o banco de dados
-cursor.close()
-con.close()
+# # Fechamento do cursor e da conexão com o banco de dados
+# cursor.close()
+# con.close()
 
-# Exibir os resultados em uma nova janela
-exibir_resultados(resultados)
-print("terminou")
+# # Exibir os resultados em uma nova janela
+# exibir_resultados(resultados)
+# print("terminou")
+
+# -------- Tese validacao usuario
+

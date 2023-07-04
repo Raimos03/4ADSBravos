@@ -3,7 +3,10 @@ con = connector.connect(host='localhost', database='brutus', user='root', passwo
 
 def pesquisar_no_banco_dados(modelo, chassi, cor, km, preco, ano):
     # Criação do cursor para executar comandos SQL
+    
+    
     cursor = con.cursor()
+
 
     # Construção da consulta SQL com base nos campos preenchidos
     consulta = "SELECT * FROM carros WHERE 1=1"
@@ -36,9 +39,40 @@ def pesquisar_no_banco_dados(modelo, chassi, cor, km, preco, ano):
 
     # Fechamento do cursor e da conexão com o banco de dados
     cursor.close()
-    con.close()
+        
 
     # Exibir os resultados em uma nova janela
     return resultados
 
 
+def exibe_Resultados_Busca(resultado):
+    #print(resultado)
+    for x in resultado:
+        print(x)
+    print(resultado)
+    return
+
+
+def consulta_pesquisa_usuario(inplogin, inpsenha):
+
+    cursor= con.cursor()
+   
+    query=f"SELECT * FROM usuarios WHERE login='{inplogin}' and senha='{inpsenha}' " 
+    #print(query)
+    try:
+        cursor.execute(query)
+
+    except:
+        print('--> Excecao Conexao')
+        
+
+    resultados = cursor.fetchall()
+    exibe_Resultados_Busca(resultados)
+
+    #fechamento conexao
+    cursor.close()
+       
+    return resultados
+
+
+#consulta_pesquisa_usuario('admin', 'admin')
