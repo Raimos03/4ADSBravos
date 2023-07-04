@@ -34,7 +34,8 @@ def IniciaApp(r):
     usuarioA=const.usuarioAut
 
 
-    MainView(r)
+
+    MainView(r) - ok
 
 
 

@@ -408,6 +408,8 @@ def janelaPrincipal(root):
     md = ttk.dialogs.dialogs.MessageDialog("Bem vindo Admin",buttons=['OK'],parent=msgframe)
     md.show()
 
+    ## criacao ---------
+
     def consultarClientes():
         # Lógica para abrir a janela de consulta de clientes
         print("Opção: Consultar Clientes")
@@ -434,22 +436,22 @@ def janelaPrincipal(root):
 
 
     # Barra de navegação
-    menu_bar = Menu(root)
+    menu_bar = ttk.Menu(root)
 
     #imagem = PhotoImage(file="img/logo.ico")  
     # Criar um widget Label com a imagem como fundo
     #label_fundo = Label(root, image=imagem)
-    label_fundo = Label(root)
+    label_fundo = ttk.Label(root)
     label_fundo.pack(anchor=CENTER)
 
 
     # Opções do menu
-    menu_veiculo = Menu(menu_bar, tearoff=0)
+    menu_veiculo = ttk.Menu(menu_bar, tearoff=0)
     menu_veiculo.add_command(label="Consultar Veículo", command=consultarVeiculo)
     menu_veiculo.add_command(label="Cadastrar Veículo", command= cadastrarVeiculo)
     menu_bar.add_cascade(label="Veículo", menu=menu_veiculo)
 
-    menu_clientes = Menu(menu_bar, tearoff=0)
+    menu_clientes = ttk.Menu(menu_bar, tearoff=0)
     menu_clientes.add_command(label="Consultar Clientes", command=consultarClientes)
     menu_clientes.add_command(label="Cadastrar Cliente", command=cadastrarCliente)
     menu_bar.add_cascade(label="Clientes", menu=menu_clientes)
@@ -457,7 +459,7 @@ def janelaPrincipal(root):
     root.config(menu=menu_bar)
 
     # Label para exibir a opção selecionada
-    label_opcao = Label(root, text="Opção selecionada:")
+    label_opcao = ttk.Label(root, text="Opção selecionada:")
     label_opcao.pack()
 
 
@@ -467,9 +469,7 @@ def janelaPrincipal(root):
     return 
 
 def ExibeStatusLoginSucesso(ntext):
-
     label_result.config(text=ntext)
-
     return
 
 def trocaFramePrincipal():
