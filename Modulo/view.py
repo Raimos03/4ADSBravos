@@ -3,6 +3,8 @@ import tkinter as tk
 from tkinter import *
 from pathlib import Path
 from tkinter import messagebox
+import time
+
 
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
@@ -19,6 +21,8 @@ PATH = Path(__file__).parent / 'img'
 
 global FrameTotalConsultaCarro
 global FrameTotalCadastraCliente
+
+
 
 def vVendas(root): #colocar aqui a tela Thiago
 
@@ -395,6 +399,15 @@ def janelaPrincipal(root):
     FrameTotalPrincipal = ttk.Frame(root,height=700,width=1200)
     FrameTotalPrincipal.pack()
 
+    # raiz = Toplevel(root)
+    # raiz.geometry(f"1200x700+{root.winfo_x()}+{root.winfo_y()}")
+
+    msgframe= ttk.Frame(root,height=200,width=300)
+    msgframe.place(x=492,y=260)
+
+    md = ttk.dialogs.dialogs.MessageDialog("Bem vindo Admin",buttons=['OK'],parent=msgframe)
+    md.show()
+
     def consultarClientes():
         # Lógica para abrir a janela de consulta de clientes
         print("Opção: Consultar Clientes")
@@ -452,16 +465,20 @@ def janelaPrincipal(root):
     const.root.mainloop()
 
     return 
+
 def ExibeStatusLoginSucesso(ntext):
 
-    #label_result.config(text="NOVO")
-    
+    label_result.config(text=ntext)
+
     return
 
 def trocaFramePrincipal():
 
+    ExibeStatusLoginSucesso("Usuario Validado")
+
     FrameTotalLogin.pack_forget()   #ok
     janelaPrincipal(const.root)
+
     return 
 
 def ExibeStatusLogin(ntext):

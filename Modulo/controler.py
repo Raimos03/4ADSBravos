@@ -15,7 +15,7 @@ def ctlrLoginESenha(login,senha): #usa o model para validar
 
     if (r==1 or r==2 or r==3):
         vw.trocaFramePrincipal()
-        vw.ExibeStatusLoginSucesso("Usuario Validado")
+        
         
 
     else:

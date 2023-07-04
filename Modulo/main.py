@@ -3,21 +3,17 @@ from controler import *
 import tkinter as tk
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
+PATH = Path(__file__).parent / 'img'
 #import ttkbootstrap
 
 #-----------Main--------
 #configuraçoes da janela
 
-root = ttk.Window("BRUTUS","yeti")
+root = ttk.Window("BRUTUS","yeti",iconphoto='img/logo2.png')
 
 
 #root.title("BRUTUS")
 root.geometry("1200x700")
-
-#root.iconbitmap("img/logo.ico")
-
-
-
 root.resizable(False,False)
 const.root=root
 
@@ -25,7 +21,7 @@ const.root=root
 IniciaApp(root)
 
 root.mainloop()
-#style = ttk.Style("yeti")
+
 
 
 con.close()
