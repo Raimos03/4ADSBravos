@@ -9,3 +9,5 @@ tipoUsr=0
     # 1 - admin
     # 2 - gerente
     # 3 - vendedor
+
+root=''

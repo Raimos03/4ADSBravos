@@ -1,15 +1,28 @@
 from view import*
+import view as vw
 from model import* 
-from constantes import* 
+import constantes as const
 from utilidade import* 
 
 def ctlrLoginESenha(login,senha): #usa o model para validar
+    
+    print(login,senha)
 
     r= modValidaUsuario(login, senha)
+    const.tipoUsr=r
 
-     
+    #print("Tipo usr",const.tipoUsr)
 
-    return usuario
+    if (r==1 or r==2 or r==3):
+        vw.trocaFramePrincipal()
+        vw.ExibeStatusLoginSucesso("Usuario Validado")
+        
+
+    else:
+        print("Usuario nao autorizado ou nao existente\nTente Novamente.")
+        vw.ExibeStatusLogin("Usuario Invalido")
+
+    return 
 
 
 
@@ -21,25 +34,17 @@ def IniciaApp(r):
     usuarioA=const.usuarioAut
 
 
-    #MainView(r)
+    MainView(r)
 
-    if (tipoUsr==0 or tipoUsr==1 or tipoUsr==2):
-        janelaPrincipal(r)
 
-    else:
-        print("Usuario nao autorizado ou nao existente\nTente Novamente.")
-        #cria janela de usuario invalido
-    
-    
-    
 
-    janelaPrincipal(r)
+    #janelaPrincipal(r)
     #vConsultaCarros(r)
     #vCadastroCarro(r)
     #vConsultaClientes(r)
     #vCadastroCliente(r)
     
-  
+    #r.mainloop()
     return 
 
     

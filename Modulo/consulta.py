@@ -66,13 +66,13 @@ def consulta_pesquisa_usuario(inplogin, inpsenha):
         print('--> Excecao Conexao')
         
 
-    resultados = cursor.fetchall()
-    exibe_Resultados_Busca(resultados)
+    resultado = cursor.fetchall()
+    exibe_Resultados_Busca(resultado)
 
     #fechamento conexao
     cursor.close()
        
-    return resultados
+    return resultado
 
 
 #consulta_pesquisa_usuario('admin', 'admin')

@@ -1,16 +1,27 @@
-import controler
+import controler as ctrl
 import tkinter as tk
 from tkinter import *
-from tkinter import ttk
+from pathlib import Path
 from tkinter import messagebox
-import sv_ttk
+
+import ttkbootstrap as ttk
+from ttkbootstrap.constants import *
+from PIL import ImageTk, Image
+
 from consulta import *
 import constantes as const
 
 from mysql import connector
 
-def vVendas(root): #colcoar aqui a tela Thiago
-    
+PATH = Path(__file__).parent / 'img'
+
+
+
+global FrameTotalConsultaCarro
+global FrameTotalCadastraCliente
+
+def vVendas(root): #colocar aqui a tela Thiago
+
 
     return 
 
@@ -180,36 +191,76 @@ def vConsultaClientes(root):
 
 def vLogin(root):
 
+    global FrameTotalLogin
+    paddingtextoY= 29
+    paddingelementoY = 50
+    comecoX = 508
+    comecoY =290
+
+
+    FrameTotalLogin = ttk.Frame(root,height=700,width=1200)
+    FrameTotalLogin.pack()
+
+
+    s = ttk.Style()
+    s.configure('TFrame',foreground='#3b7cd1')
+
+    #s.configure('SB.TFrame',background="#3b7cd1")
+
+    # s.configure('Frame1.TFrame', background='#3b7cd1')
+    FrameLogin =  ttk.Frame(FrameTotalLogin,height=330,width=350,bootstyle="light") 
+    FrameLogin.place(x=435,y=210)
+    
+    splash=image=ttk.PhotoImage(name='logo',file=PATH / 'logo.png')
+    limage=ttk.Label(FrameTotalLogin, image=splash)
+    limage.place(x=480,y=comecoY-185)
+   
+
     #Definindo título da janela
     root.title("BRUTUS - Identificação")
-
+    
     # Labels
-    label_username = Label(root, text="Nome de usuário:")
-    label_username.pack()
+    
+    label_username = ttk.Label(FrameTotalLogin, text="Nome de usuário:",font=("Helvetica",10),bootstyle=("INVERSE","LIGHT"))
+    label_username.place(x=comecoX,y=comecoY)
+    
+    
+    #label_username.pack()
 
     # Entrada de nome de usuário
-    entry_username = Entry(root)
-    entry_username.pack()
+    entry_username = ttk.Entry(FrameTotalLogin,width=30)
+    entry_username.place(x=comecoX,y=comecoY+paddingtextoY)
+    comecoY+=paddingtextoY+paddingelementoY
+    #entry_username.pack()
 
     # Label
-    label_password = Label(root, text="Senha:")
-    label_password.pack()
+    label_password = ttk.Label(FrameTotalLogin, text="Senha:",font=("Helvetica",10),bootstyle=("INVERSE","LIGHT"))
+    label_password.place(x=comecoX,y=comecoY)
+    comecoY+=paddingtextoY
+    #label_password.pack()
 
     # Entrada de senha
-    entry_password = Entry(root, show="*")
-    entry_password.pack()
+    entry_password = ttk.Entry(FrameTotalLogin, show="*",width=30)
+    entry_password.place(x=comecoX,y=comecoY)
+    comecoY+=paddingelementoY
 
     # Botão de login
-    button_login = Button(root, text="Login")
-    button_login.pack()
+    button_login = ttk.Button(FrameTotalLogin, text="Login",command=lambda:ctrl.ctlrLoginESenha(entry_username.get(),entry_password.get()))
+    button_login.place(x=comecoX+70,y=comecoY)
+    
+    #button_login.pack() -- pack centraliza
+    const.inputLogin = entry_username.get()
+    const.inputSenha = entry_password.get()
+
 
     # Label para exibir resultado
-    label_result = Label(root, text="")
-    label_result.pack()
+    global label_result
+    label_result = ttk.Label(FrameTotalLogin, text="",bootstyle=("INVERSE","LIGHT"),font=("Helvetica",10))
+    label_result.place(x=comecoX+53,y=comecoY+50)
 
     # Iniciar a janela principal
-    #root.mainloop()
-    return [login, senha]
+    const.root.mainloop()
+    return 
 
 def vCadastroCliente(root):
 
@@ -279,7 +330,7 @@ def vCadastroCliente(root):
     button_cadastrar.pack()
 
     # Iniciar a janela principal
-    #root.mainloop()
+    const.root.mainloop()
 
 
     return
@@ -340,6 +391,9 @@ def vCadastroCarro(root):
 
 def janelaPrincipal(root):
 
+    global FrameTotalPrincipal
+    FrameTotalPrincipal = ttk.Frame(root,height=700,width=1200)
+    FrameTotalPrincipal.pack()
 
     def consultarClientes():
         # Lógica para abrir a janela de consulta de clientes
@@ -393,22 +447,37 @@ def janelaPrincipal(root):
     label_opcao = Label(root, text="Opção selecionada:")
     label_opcao.pack()
 
-    # Iniciar a janela principal
-    #root.mainloop()
 
+    # Iniciar a janela principal
+    const.root.mainloop()
+
+    return 
+def ExibeStatusLoginSucesso(ntext):
+
+    #label_result.config(text="NOVO")
+    
     return
 
+def trocaFramePrincipal():
 
+    FrameTotalLogin.pack_forget()   #ok
+    janelaPrincipal(const.root)
+    return 
 
+def ExibeStatusLogin(ntext):
+
+    label_result.config(text=ntext)
+    
+    return
 
 def MainView(root):
 
-
-    print("Tela de Login criada : 1")
-    login,senha=vLogin(root)
-    const.inputLogin = login
-    const.inputSenha = senha
-    const.usuarioAut=ctlrLoginESenha(login,senha)
+    
+    #print("Tela de Login criada : 1")
+    
+    vLogin(root)
+   
+    
     
 
 
