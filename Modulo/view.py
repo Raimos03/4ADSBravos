@@ -3,8 +3,6 @@ import tkinter as tk
 from tkinter import *
 from pathlib import Path
 from tkinter import messagebox
-import time
-
 
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
@@ -23,6 +21,38 @@ global FrameTotalConsultaCarro
 global FrameTotalCadastraCliente
 
 
+def montaTabela(px,py,lvalores):
+
+    treeFrame = ttk.Frame(FrameTotalPrincipal,width=630,height=150,style="#ffff")
+    treeFrame.place(x=px+45,y=py)
+    #for el in lvalores:
+
+    s=ttk.Style()
+    s.configure('Treeview', foreground = '#10223b',rowheight=25,font=("Helvetica",9),highlighttickness='#3b7cd1')
+    s.configure("Treeview.Heading", font=('Helvetica', 10,'bold'),background='#3b7cd1', foreground='#f0f2f5') # Modify the font of the headings
+    s.map('Treeview', background = [('selected','#b1c0de')])
+    #3b7cd1
+
+    col = ("Nome","Sobrenome","Cargo")
+    tabela =ttk.Treeview(treeFrame, show="headings",columns = col, height=5 ,style='Treeview',padding=10)
+
+
+    tabela.column("Nome",width = 180,anchor="ce")
+    tabela.column("Sobrenome",width = 180,anchor="ce")
+    tabela.column("Cargo",width = 180,anchor="ce")
+
+    
+    for s in col:
+        tabela.heading(s, text=s)
+
+    for el in lvalores:
+
+        tabela.insert('',ttk.END,values=(el[3],el[4],el[5]))
+        
+
+    tabela.pack(fill='x')
+
+    return
 
 def vVendas(root): #colocar aqui a tela Thiago
 
@@ -407,7 +437,8 @@ def janelaPrincipal(root):
 
     md = ttk.dialogs.dialogs.MessageDialog("Bem vindo Admin",buttons=['OK'],parent=msgframe)
     md.show()
-
+    msgframe.destroy()
+    msgframe.hidden=0
     ## criacao ---------
 
     def consultarClientes():
@@ -441,7 +472,7 @@ def janelaPrincipal(root):
     #imagem = PhotoImage(file="img/logo.ico")  
     # Criar um widget Label com a imagem como fundo
     #label_fundo = Label(root, image=imagem)
-    label_fundo = ttk.Label(root)
+    label_fundo = ttk.Label(root,text="LABEL FUNDO")
     label_fundo.pack(anchor=CENTER)
 
 
@@ -459,11 +490,72 @@ def janelaPrincipal(root):
     root.config(menu=menu_bar)
 
     # Label para exibir a opção selecionada
-    label_opcao = ttk.Label(root, text="Opção selecionada:")
-    label_opcao.pack()
+    #label_opcao = ttk.Label(root, text="Opção selecionada:")
+    #label_opcao.pack()
 
 
-    # Iniciar a janela principal
+
+    #---- Iniciar a construcao da janela principal do meio com informacoes
+    
+    # s = ttk.Style()
+    # s.configure('TFrame',foreground='#3b7cd1')
+    # s.configure('SB.TFrame',background="#3b7cd1")
+    # s.configure('Frame1.TFrame', background='#3g7cd1')
+
+    global valorVenda
+
+    sf = ttk.Style()
+    sf.configure('TFrame')
+    sf.configure('SB.TFrame',background='#f5f6f7')
+
+    FrameTopo = ttk.Frame(FrameTotalPrincipal,height=180,width=730,style='SB.TFrame') #height=160,width=730
+    FrameTopo.place(x=230, y =80)
+    #bootstyle=("iNVERSE","light")
+
+    LTotalVenda = ttk.Label(FrameTotalPrincipal, text= "Total de vendas:",foreground='#3b7cd1',background='#f5f6f7',font=("Helvetica",22))
+    LTotalVenda.place(x=300, y =150)
+
+
+    valorVenda=ctrl.ConsultaValorTotalBanco()
+    p1= str(valorVenda//1000)
+    p2= p1+'.000' 
+    fvalorVenda=f'{p2}'+",00"
+
+    #print(p2)
+
+    LValorVenda = ttk.Label(FrameTotalPrincipal, text= f'{fvalorVenda}',background='#f5f6f7',font=("Helvetica",22))
+    LValorVenda.place(x=700, y =150)
+
+
+
+
+    load1 =ttk.PhotoImage(name='maintopo',file=PATH / 'imgprincipalmeiotopo.png')
+    load1= load1.subsample(4)
+
+    icontopo=Label(FrameTotalPrincipal,image=load1)
+    icontopo.place(x=145,y=75)
+
+    load2=ttk.PhotoImage(name='mainbaixo',file=PATH / 'imgprincipalmeiobaixo.png')
+    load2= load2.subsample(4)
+    imgbaixo = Label(FrameTotalPrincipal,image=load2)
+    imgbaixo.place(x=145,y=320)
+
+
+
+
+    FrameBaixo = ttk.Frame(FrameTotalPrincipal,height=280,width=730,style="SB.TFrame") #height=160,width=730
+    FrameBaixo.place(x=230, y =320)
+
+    LVendedores = ttk.Label(FrameTotalPrincipal, text= "Vendedores",foreground='#3b7cd1',background='#f5f6f7',font=("Helvetica",14))
+    LVendedores.place(x=300, y =355)
+
+    lvendedores=ctrl.ConsultaVendedores()
+    montaTabela(280,410,lvendedores)
+
+
+
+
+
     const.root.mainloop()
 
     return 

@@ -4,6 +4,16 @@ from model import*
 import constantes as const
 from utilidade import* 
 
+
+def ConsultaValorTotalBanco():
+    return  modCalculaValorVendas()
+
+def ConsultaVendedores():
+    return modConsultaVendedores()
+
+def ConsultaClientes():
+    return modConsultaClientes()
+
 def ctlrLoginESenha(login,senha): #usa o model para validar
     
     print(login,senha)
@@ -16,8 +26,6 @@ def ctlrLoginESenha(login,senha): #usa o model para validar
     if (r==1 or r==2 or r==3):
         vw.trocaFramePrincipal()
         
-        
-
     else:
         print("Usuario nao autorizado ou nao existente\nTente Novamente.")
         vw.ExibeStatusLogin("Usuario Invalido")
@@ -35,11 +43,11 @@ def IniciaApp(r):
 
 
 
-    MainView(r) - ok
+    #MainView(r) #- ok
 
 
 
-    #janelaPrincipal(r)
+    janelaPrincipal(r)
     #vConsultaCarros(r)
     #vCadastroCarro(r)
     #vConsultaClientes(r)

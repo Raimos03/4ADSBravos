@@ -49,7 +49,7 @@ def exibe_Resultados_Busca(resultado):
     #print(resultado)
     for x in resultado:
         print(x)
-    print(resultado)
+    #print(resultado)
     return
 
 
@@ -75,4 +75,50 @@ def consulta_pesquisa_usuario(inplogin, inpsenha):
     return resultado
 
 
+def consulta_pesquisa_totalvendas():
+
+    cursor= con.cursor()
+   
+    query=f"SELECT * FROM vendas" 
+    #print(query)
+    try:
+        cursor.execute(query)
+
+    except:
+        print('--> Excecao Conexao')
+        
+
+    resultado = cursor.fetchall()
+    exibe_Resultados_Busca(resultado)
+
+    #fechamento conexao
+    cursor.close()
+
+
+    return resultado
+
+
+def consulta_pesquisa_vendedores():
+
+    cursor= con.cursor()
+   
+    query=f"SELECT * FROM usuarios where conta = 'vendedor'" 
+    #print(query)
+    try:
+        cursor.execute(query)
+
+    except:
+        print('--> Excecao Conexao')
+        
+
+    resultado = cursor.fetchall()
+    #exibe_Resultados_Busca(resultado)
+
+    #fechamento conexao
+    cursor.close()
+
+    return resultado
+
 #consulta_pesquisa_usuario('admin', 'admin')
+#consulta_pesquisa_totalvenda()
+consulta_pesquisa_vendedores()

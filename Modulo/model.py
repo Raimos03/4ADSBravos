@@ -5,6 +5,34 @@ from consulta import*
 from utilidade import*
 import constantes as const
 
+
+def modCalculaValorVendas():
+
+    tpResultadoBanco=consulta_pesquisa_totalvendas() #sucesso retorna uma tupla
+    #print(tpResultadoBanco)
+    total=0
+
+    if(len(tpResultadoBanco)==0):
+        return 0
+    else:
+        for tp in tpResultadoBanco:
+            valor,qtd=tp[8],tp[9]
+            total+=(valor*qtd)
+
+
+    #print(total)
+    return total
+
+def modConsultaVendedores():
+
+    tpResultadoBanco=consulta_pesquisa_vendedores()
+
+    if(len(tpResultadoBanco)==0):
+        return 0
+    
+
+    return tpResultadoBanco
+
 def modValidaUsuario(login, senha):
 
     tpResultadoBanco=consulta_pesquisa_usuario(login,senha) #sucesso retorna uma tupla

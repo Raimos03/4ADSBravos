@@ -186,17 +186,58 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `login` text NOT NULL,
   `senha` text NOT NULL,
+  `nome` text NOT NULL,
+  `sobrenome` text NOT NULL,
+  `conta` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
 --
 -- Extraindo dados da tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `login`, `senha`) VALUES
-(1, 'admin', 'admin');
-COMMIT;
+INSERT INTO `usuarios` (`id`, `login`, `senha`,`nome`,`sobrenome`,`conta`) VALUES
+(1, 'admin', 'admin','admin','admin','administrador'),
+(2, 'Pedro', '2023','Pedro','Lima','gerente'),
+(3, 'Tiago', '2023','Thiago','Policarpo','gerente'),
+(4, 'Marcelo', '0001','Marcelo','Gomes','vendedor'),
+(5, 'Joao', '0002','Joao','Silveira','vendedor'),
+(6, 'Luana', '0003','Luna','Magalhaes','vendedor')
+;
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+--
+-- Estrutura da tabela `vendas`
+--
+
+DROP TABLE IF EXISTS `vendas`;
+CREATE TABLE IF NOT EXISTS  `vendas`  (
+    `idvenda` int NOT NULL UNIQUE,
+    `idcliente` int(11) NOT NULL ,
+    `nome` text,
+    `cpf` text NOT NULL,
+    `idcarro` int(6) NOT NULL,
+    `modelo` text,
+    `ano` int,
+    `cor` text,
+    `preco` int,
+    `quantidade` int,
+    PRIMARY KEY (`idvenda`)
+    );
+
+--
+-- Inserindo dados da tabela `clientes`
+--
+
+INSERT INTO `vendas` (`idvenda`, `idcliente`, `nome`, `cpf`, `idcarro`, `modelo`, `cor`, `ano`, `preco`, `quantidade`)
+VALUES (1, 10, 'Patrícia Castro', '789.654.321-00', 18, 'Corolla', 'Azul',2019, 29000, 1),
+		(2,  13, 'Gustavo Lima', '321.654.987-00', 6, 'HR-V', 'Prata',2019, 30000, 1),
+        (3, 10, 'Patrícia Castro', '789.654.321-00', 15, 'Cruze','Branco',2016,  22000, 2),
+       (4, 17, 'Marcelo Gomes', '321.987.456-00', 21, 'HR-V','Prata', 2019, 27000, 1);
+       
+       
+COMMIT;
