@@ -11,8 +11,8 @@ def ConsultaValorTotalBanco():
 def ConsultaVendedores():
     return modConsultaVendedores()
 
-def ConsultaClientes():
-    return modConsultaClientes()
+#def ConsultaClientes():
+#    return modConsultaClientes()
 
 def ctlrLoginESenha(login,senha): #usa o model para validar
     

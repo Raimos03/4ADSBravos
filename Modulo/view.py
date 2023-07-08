@@ -9,6 +9,7 @@ from ttkbootstrap.constants import *
 from PIL import ImageTk, Image
 
 from consulta import *
+from cadastra import *
 import constantes as const
 
 from mysql import connector
@@ -54,7 +55,7 @@ def montaTabela(px,py,lvalores):
 
     return
 
-def vVendas(root): #colocar aqui a tela Thiago
+def vVendas(root):
 
 
     return 
@@ -148,12 +149,50 @@ def vConsultaCarros(root):
     button_pesquisar = Button(janelaConsulta, text="Pesquisar", command=pesquisar) #clique no botao executa
     button_pesquisar.pack()
 
-    # Iniciar a janela principal
-    #root.mainloop()
     return 
 
 def vConsultaClientes(root):
     
+    def pesquisar():
+        nome = entry_nome.get()
+        idade = entry_idade.get()
+        cpf = entry_cpf.get()
+        cidade = entry_cidade.get()
+        telefone = entry_telefone.get()
+        sexo = entry_sexo.get()
+        
+        exibir_resultados(pesquisar_clientes_no_banco_dados(nome, idade, cpf, cidade, telefone, sexo))
+
+    def exibir_resultados(resultados):
+        # Criação da janela de exibição dos resultados
+        janela_resultados = Toplevel(janelaConsulta)
+        janela_resultados.title("Resultados da pesquisa")
+        janela_resultados.geometry("1200x700")
+        janela_resultados.resizable(False,False)
+        z=10
+
+        # Exibir cada registro retornado pela pesquisa
+        for registro in resultados:
+            # Criação do frame para conter o botão e os detalhes do registro
+            frame_registro = Frame(janela_resultados)
+            frame_registro.place(x=10, y=z)
+            z+=40
+          
+
+            # Função para capturar o registro selecionado
+            def selecionar_registro(registro):
+                messagebox.showinfo("Registro selecionado", f"Registro selecionado: {registro}")
+
+            # Botão para selecionar o registro
+            botao_selecao = Button(frame_registro, text="Selecionar", command=lambda r=registro: selecionar_registro(r))
+            botao_selecao.pack(side=LEFT)
+
+            # Detalhes do registro
+            detalhes_registro = f"ID: {registro[0]} Nome: {registro[1]} Idade: {registro[2]} CPF: {registro[3]} Endereço: {registro[4]} Cidade: {registro[5]}CEP: {registro[6]}\nTelefone: {registro[7]} Email: {registro[8]} Sexo: {registro[8]} Compras Feitas: {registro[8]}"
+            label_detalhes = Label(frame_registro, text=detalhes_registro)
+            label_detalhes.pack(side=LEFT)
+        
+
     #Definindo nova janela TopLevel
     janelaConsulta = Toplevel(root)
     janelaConsulta.grab_set()
@@ -179,35 +218,17 @@ def vConsultaClientes(root):
     entry_cpf = Entry(janelaConsulta)
     entry_cpf.pack()
 
-    # Label e campo de entrada para endereço
-    label_endereco = Label(janelaConsulta, text="Endereço:")
-    label_endereco.pack()
-    entry_endereco = Entry(janelaConsulta)
-    entry_endereco.pack()
-
     # Label e campo de entrada para cidade
     label_cidade = Label(janelaConsulta, text="Cidade:")
     label_cidade.pack()
     entry_cidade = Entry(janelaConsulta)
     entry_cidade.pack()
 
-    # Label e campo de entrada para CEP
-    label_cep = Label(janelaConsulta, text="CEP:")
-    label_cep.pack()
-    entry_cep = Entry(janelaConsulta)
-    entry_cep.pack()
-
     # Label e campo de entrada para telefone
     label_telefone = Label(janelaConsulta, text="Telefone:")
     label_telefone.pack()
     entry_telefone = Entry(janelaConsulta)
     entry_telefone.pack()
-
-    # Label e campo de entrada para email
-    label_email = Label(janelaConsulta, text="Email:")
-    label_email.pack()
-    entry_email = Entry(janelaConsulta)
-    entry_email.pack()
 
     # Label e campo de entrada para sexo
     label_sexo = Label(janelaConsulta, text="Sexo:")
@@ -216,7 +237,7 @@ def vConsultaClientes(root):
     entry_sexo.pack()
 
     # Botão de pesquisa
-    button_pesquisar = Button(janelaConsulta, text="Pesquisar")
+    button_pesquisar = Button(janelaConsulta, text="Pesquisar", command=pesquisar)
     button_pesquisar.pack()
 
     # Iniciar a janela principal
@@ -298,6 +319,19 @@ def vLogin(root):
 
 def vCadastroCliente(root):
 
+    def cadastra():
+        nome = entry_nome.get()
+        idade = entry_idade.get()
+        cpf = entry_cpf.get()
+        endereco = entry_endereco.get()
+        cidade = entry_cidade.get()
+        cep = entry_cep.get()
+        telefone = entry_telefone.get()
+        email = entry_email.get()
+        sexo = entry_sexo.get()
+
+        Mensagem(cadastrar_cliente_banco_dados(nome, idade, cpf, endereco, cidade, cep, telefone, email, sexo))
+            
     #Definindo nova janela TopLevel
     janelaConsulta = Toplevel(root)
     janelaConsulta.grab_set()
@@ -360,7 +394,7 @@ def vCadastroCliente(root):
     entry_sexo.pack()
 
     # Botão de cadastrar
-    button_cadastrar = Button(janelaConsulta, text="Cadastrar")
+    button_cadastrar = Button(janelaConsulta, text="Cadastrar",command=cadastra)
     button_cadastrar.pack()
 
     # Iniciar a janela principal
@@ -371,51 +405,75 @@ def vCadastroCliente(root):
 
 def vCadastroCarro(root):
 
+    def cadastra():
+        chassi = entry_chassi.get()
+        cor = entry_cor.get()
+        km = entry_km.get()
+        ano = entry_ano.get()
+        modelo = entry_modelo.get()
+        custo = entry_custo.get()
+        preco = entry_preco.get()
+        qt = entry_qt.get()
+
+        Mensagem(cadastrar_veiculo_banco_dados(chassi, cor, km, ano, modelo, custo, preco, qt))
+        
     #Definindo nova janela TopLevel
     janelaConsulta = Toplevel(root)
     janelaConsulta.grab_set()
     janelaConsulta.title("BRUTUS - Cadastro de veículos")
-    #janelaConsulta.geometry("1200x700")
-    #janelaConsulta.resizable(False,False)
+    janelaConsulta.geometry("1200x700")
+    janelaConsulta.resizable(False,False)
 
-    # Label e campo de entrada para nome
-    label_nome = Label(janelaConsulta, text="Modelo:")
-    label_nome.pack()
-    entry_nome = Entry(janelaConsulta)
-    entry_nome.pack()
+    # Label e campo de entrada para chassi
+    label_chassi = Label(janelaConsulta, text="Chassi:")
+    label_chassi.pack()
+    entry_chassi = Entry(janelaConsulta)
+    entry_chassi.pack()
 
-    # Label e campo de entrada para idade
-    label_idade = Label(janelaConsulta, text="Chassi:")
-    label_idade.pack()
-    entry_idade = Entry(janelaConsulta)
-    entry_idade.pack()
+    # Label e campo de entrada para cor
+    label_cor = Label(janelaConsulta, text="Cor:")
+    label_cor.pack()
+    entry_cor = Entry(janelaConsulta)
+    entry_cor.pack()
 
-    # Label e campo de entrada para CPF
-    label_cpf = Label(janelaConsulta, text="Cor:")
-    label_cpf.pack()
-    entry_cpf = Entry(janelaConsulta)
-    entry_cpf.pack()
+    # Label e campo de entrada para km
+    label_km = Label(janelaConsulta, text="KM:")
+    label_km.pack()
+    entry_km = Entry(janelaConsulta)
+    entry_km.pack()
 
-    # Label e campo de entrada para endereço
-    label_endereco = Label(janelaConsulta, text="KM:")
-    label_endereco.pack()
-    entry_endereco = Entry(janelaConsulta)
-    entry_endereco.pack()
+    # Label e campo de entrada para ano
+    label_ano = Label(janelaConsulta, text="Ano:")
+    label_ano.pack()
+    entry_ano = Entry(janelaConsulta)
+    entry_ano.pack()
 
-    # Label e campo de entrada para cidade
-    label_cidade = Label(janelaConsulta, text="Preço:")
-    label_cidade.pack()
-    entry_cidade = Entry(janelaConsulta)
-    entry_cidade.pack()
+    # Label e campo de entrada para modelo
+    label_modelo = Label(janelaConsulta, text="Modelo:")
+    label_modelo.pack()
+    entry_modelo = Entry(janelaConsulta)
+    entry_modelo.pack()
 
-    # Label e campo de entrada para CEP
-    label_cep = Label(janelaConsulta, text="Ano:")
-    label_cep.pack()
-    entry_cep = Entry(janelaConsulta)
-    entry_cep.pack()
+    # Label e campo de entrada para custo
+    label_custo = Label(janelaConsulta, text="Custo:")
+    label_custo.pack()
+    entry_custo = Entry(janelaConsulta)
+    entry_custo.pack()
+    
+    # Label e campo de entrada para preco
+    label_preco = Label(janelaConsulta, text="Preço:")
+    label_preco.pack()
+    entry_preco = Entry(janelaConsulta)
+    entry_preco.pack()
+
+    # Label e campo de entrada para quantidade
+    label_qt = Label(janelaConsulta, text="Quantidade:")
+    label_qt.pack()
+    entry_qt = Entry(janelaConsulta)
+    entry_qt.pack()
 
     # Botão de cadastrar
-    button_cadastrar = Button(janelaConsulta, text="Cadastrar")
+    button_cadastrar = Button(janelaConsulta, text="Cadastrar", command=cadastra)
     button_cadastrar.pack()
 
     # Iniciar a janela principal
@@ -463,7 +521,7 @@ def janelaPrincipal(root):
 
     # Função para exibir a opção selecionada
     def exibir_opcao(opcao):
-        label_opcao.config(text=f"Opção selecionada: {opcao}")
+            opcao.config(text=f"Opção selecionada: {opcao}")
 
 
     # Barra de navegação
@@ -604,7 +662,77 @@ def MainView(root):
 
     return 
 
+def Mensagem(cod):
 
+    if cod == 0:
+        messagebox.showinfo("Cadastro realizado!","Cadastro feito com sucesso!")
 
+    if cod == 1:
+        messagebox.showinfo("Erro","O nome deve conter apenas letras e espaços, com no máximo 100 caracteres.")
 
+    if cod == 2:
+        messagebox.showinfo("Erro","A idade deve ser um número inteiro entre 18 e 120.")
+
+    if cod == 3:
+        messagebox.showinfo("Erro","A idade deve ser um número inteiro.")
+
+    if cod == 4:
+        messagebox.showinfo("Erro","O CPF deve ser um numero inteiro.")
+   
+    if cod == 5:
+        messagebox.showinfo("Erro","O CPF deve conter exatamente 11 dígitos numéricos.")
+        
+    if cod == 6:
+        messagebox.showinfo("Erro","CEP deve ser um número inteiro.")
+
+    if cod == 7:
+        messagebox.showinfo("Erro","O CEP deve conter exatamente 8 dígitos numéricos.")
+
+    if cod == 8:
+        messagebox.showinfo("Erro","Telefone deve ser um número inteiro.")
+
+    if cod == 9:
+        messagebox.showinfo("Erro","O telefone deve conter no máximo 11 caracteres.")
+
+    if cod == 10:
+        messagebox.showinfo("Erro","Preencha todos os campos corretamente!")
+
+    if cod == 11:
+        messagebox.showinfo("Erro","O chassi deve conter apenas letras e espaços, com no máximo 100 caracteres.")
+
+    if cod == 12:
+        messagebox.showinfo("Erro","A cor deve conter apenas letras e espaços, com no máximo 100 caracteres.")
+
+    if cod == 13:
+        messagebox.showinfo("Erro","Km deve conter entre 1 e 7 dígitos numéricos.")
+
+    if cod == 14:
+        messagebox.showinfo("Erro","KM deve ser um número inteiro.")
+
+    if cod == 15:
+        messagebox.showinfo("Erro","Ano deve ter no maximo 4 digtos.")
+
+    if cod == 16:
+        messagebox.showinfo("Erro","Ano deve ser um número inteiro.")
+
+    if cod == 17:
+        messagebox.showinfo("Erro","O modelo deve conter apenas letras e espaços, com no máximo 100 caracteres.")
+
+    if cod == 18:
+        messagebox.showinfo("Erro","Custo deve conter entre 1 e 7 dígitos numéricos.")
+
+    if cod == 19:
+        messagebox.showinfo("Erro","Custo deve ser um número inteiro.")
+
+    if cod == 20:
+        messagebox.showinfo("Erro","Preco deve conter entre 1 e 7 dígitos numéricos.")
+
+    if cod == 21:
+        messagebox.showinfo("Erro","Preco deve ser um número inteiro.")
+
+    if cod == 22:
+        messagebox.showinfo("Erro","Quantidade deve conter entre 1 e 7 dígitos numéricos.")
+
+    if cod == 23:
+        messagebox.showinfo("Erro","Quantiade deve ser um número inteiro.")
 

@@ -10,13 +10,9 @@ PATH = Path(__file__).parent / 'img'
 #configuraçoes da janela
 
 root = ttk.Window("BRUTUS","yeti",iconphoto='img/logo2.png')
-
-
-#root.title("BRUTUS")
 root.geometry("1200x700")
 root.resizable(False,False)
 const.root=root
-
 
 IniciaApp(root)
 

@@ -47,7 +47,7 @@ def modValidaUsuario(login, senha):
         if comparaS(rlogin,'admin')  and comparaS(rsenha,'admin'): #admin
             return 1
 
-        elif (g in rologin):    #gerente
+        elif (g in rlogin):    #gerente
             return 2
 
         else:   #vendedor
