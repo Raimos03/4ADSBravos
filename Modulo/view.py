@@ -467,27 +467,38 @@ def janelaPrincipal(root):
 
 
     # Barra de navegação
-    menu_bar = ttk.Menu(root)
 
+    sm=ttk.Style()
+    sm.configure('custom.TMenubutton', background='red', foreground='white', font=('Helvetica', 24))
+    
+    tmenu = tk.Menu(root)
+    
+    
     #imagem = PhotoImage(file="img/logo.ico")  
     # Criar um widget Label com a imagem como fundo
     #label_fundo = Label(root, image=imagem)
-    label_fundo = ttk.Label(root,text="LABEL FUNDO")
-    label_fundo.pack(anchor=CENTER)
+
+    ##label_fundo = ttk.Label(root,text="LABEL FUNDO")
+    ##label_fundo.pack(anchor=CENTER)
 
 
     # Opções do menu
-    menu_veiculo = ttk.Menu(menu_bar, tearoff=0)
+    
+
+    menu_veiculo = ttk.Menu(tmenu, tearoff=0)
     menu_veiculo.add_command(label="Consultar Veículo", command=consultarVeiculo)
     menu_veiculo.add_command(label="Cadastrar Veículo", command= cadastrarVeiculo)
-    menu_bar.add_cascade(label="Veículo", menu=menu_veiculo)
+    tmenu.add_cascade(label="Veículo", menu=menu_veiculo)
 
-    menu_clientes = ttk.Menu(menu_bar, tearoff=0)
+    menu_clientes = ttk.Menu(tmenu, tearoff=0)
     menu_clientes.add_command(label="Consultar Clientes", command=consultarClientes)
     menu_clientes.add_command(label="Cadastrar Cliente", command=cadastrarCliente)
-    menu_bar.add_cascade(label="Clientes", menu=menu_clientes)
+    tmenu.add_cascade(label="Clientes", menu=menu_clientes)
 
-    root.config(menu=menu_bar)
+
+
+
+    root.config(menu=tmenu)
 
     # Label para exibir a opção selecionada
     #label_opcao = ttk.Label(root, text="Opção selecionada:")
