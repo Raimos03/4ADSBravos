@@ -1,4 +1,26 @@
-import re 
+import re
+
+def vNome(input):
+    #Retorna True or False
+    #Tamanho minimo de 10 caracteres
+    #Pelo menos um espaço
+
+    if not input.replace(' ','').isalpha() :
+        print('ERRO numero')
+        return False
+
+    if len(input)<10 : 
+        print('ERRO tamanho')
+        return False
+
+    espaco = str.count(input,' ')
+    if  espaco < 1 :
+        print('ERRO espaco')
+        return False
+
+    return True  
+
+    
 
 def vNome(input):
     #Retorna True or False
@@ -169,3 +191,16 @@ def valida_cadastro_veiculos(chassi, cor, km, ano, modelo, custo, preco, qt):
         # validação de todos os campos preenchidos
         print("Preencha todos os campos corretamente!")
         return 10
+    
+
+
+
+
+
+
+
+
+
+
+
+

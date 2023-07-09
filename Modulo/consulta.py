@@ -44,46 +44,6 @@ def pesquisar_no_banco_dados(modelo, chassi, cor, km, preco, ano):
     # Exibir os resultados em uma nova janela
     return resultados
 
-def pesquisar_clientes_no_banco_dados(nome, idade, cpf, cidade, telefone, sexo):
-    # Criação do cursor para executar comandos SQL
-    
-    cursor = con.cursor()
-
-    # Construção da consulta SQL com base nos campos preenchidos
-    consulta = "SELECT * FROM clientes WHERE 1=1"
-    valores = []
-
-    if nome:
-        consulta += " AND nome = %s"
-        valores.append(nome)
-    if idade:
-        consulta += " AND idade = %s"
-        valores.append(idade)
-    if cpf:
-        consulta += " AND cpf = %s"
-        valores.append(cpf)
-    if cidade:
-        consulta += " AND cidade = %s"
-        valores.append(cidade)
-    if telefone:
-        consulta += " AND telefone = %s"
-        valores.append(telefone)
-    if sexo:
-        consulta += " AND sexo = %s"
-        valores.append(sexo)
-
-    # Execução da consulta no banco de dados
-    cursor.execute(consulta, valores)
-
-    # Obter os resultados da consulta
-    resultados = cursor.fetchall()
-
-    # Fechamento do cursor e da conexão com o banco de dados
-    cursor.close()
-        
-
-    # Exibir os resultados em uma nova janela
-    return resultados
 
 def exibe_Resultados_Busca(resultado):
     #print(resultado)
@@ -161,4 +121,51 @@ def consulta_pesquisa_vendedores():
 
 #consulta_pesquisa_usuario('admin', 'admin')
 #consulta_pesquisa_totalvenda()
-consulta_pesquisa_vendedores()
+#consulta_pesquisa_vendedores()
+
+def pesquisar_clientes_no_banco_dados(nome, idade, cpf, cidade, telefone, sexo):
+    # Criação do cursor para executar comandos SQL
+    
+    cursor = con.cursor()
+
+    # Construção da consulta SQL com base nos campos preenchidos
+    consulta = "SELECT * FROM clientes WHERE 1=1"
+    valores = []
+
+    if nome:
+        consulta += " AND nome = %s"
+        valores.append(nome)
+    if idade:
+        consulta += " AND idade = %s"
+        valores.append(idade)
+    if cpf:
+        consulta += " AND cpf = %s"
+        valores.append(cpf)
+    if cidade:
+        consulta += " AND cidade = %s"
+        valores.append(cidade)
+    if telefone:
+        consulta += " AND telefone = %s"
+        valores.append(telefone)
+    if sexo:
+        consulta += " AND sexo = %s"
+        valores.append(sexo)
+
+    # Execução da consulta no banco de dados
+    cursor.execute(consulta, valores)
+
+    # Obter os resultados da consulta
+    resultados = cursor.fetchall()
+
+    # Fechamento do cursor e da conexão com o banco de dados
+    cursor.close()
+        
+
+    # Exibir os resultados em uma nova janela
+    return resultados
+
+def cadastraCarro(lvalores):
+
+    
+    return 
+    

@@ -3,13 +3,13 @@ import tkinter as tk
 from tkinter import *
 from pathlib import Path
 from tkinter import messagebox
+from cadastra import *
 
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 from PIL import ImageTk, Image
 
 from consulta import *
-from cadastra import *
 import constantes as const
 
 from mysql import connector
@@ -18,13 +18,12 @@ PATH = Path(__file__).parent / 'img'
 
 
 
-global FrameTotalConsultaCarro
-global FrameTotalCadastraCliente
+
 
 
 def montaTabela(px,py,lvalores):
 
-    treeFrame = ttk.Frame(FrameTotalPrincipal,width=630,height=150,style="#ffff")
+    treeFrame = ttk.Frame(const.FrameTotalPrincipal,width=630,height=150,style="#ffff")
     treeFrame.place(x=px+45,y=py)
     #for el in lvalores:
 
@@ -55,8 +54,196 @@ def montaTabela(px,py,lvalores):
 
     return
 
-def vVendas(root):
+def vVendas(root): #colocar aqui a tela Thiago
 
+    sf = ttk.Style()
+    sf.configure('TFrame')
+    sf.configure('VD.TFrame',background='#f5f6f7')
+    comecoX=80
+    comecoY=100
+    paddingCampoX=70
+    paddingCampoY=20
+    paddingTextoY=20
+
+
+    lvalores=[]
+
+    global FrameTotalVendas
+    const.telaSaida=5
+    
+    FrameVendas = ttk.Frame(root,height=700,width=1200)
+    const.FrameTotalVendas = FrameVendas
+    FrameVendas.pack()
+
+
+    FrameMeio = ttk.Frame(FrameVendas,height=500,width=730,style='VD.TFrame') #height=160,width=730
+    FrameMeio.place(x=230, y =100)
+    #bootstyle=("iNVERSE","light")
+
+    LVenda = ttk.Label(root, text= "Vendas:",foreground='#3b7cd1',background='#ffffff',font=("Helvetica",22))
+    LVenda.place(x=80, y =80)
+
+    #---
+
+    FrameCadastrarVenda= ttk.Frame(FrameMeio,height=500,width=730,style='VD.TFrame') #height=160,width=730
+    FrameCadastrarVenda.place(x=50, y =50)
+    #bootstyle=("iNVERSE","light")
+    #cinza #f5f6f7'
+
+    LCadastrarVenda = ttk.Label(FrameMeio, text= "Cadastrar nova venda:",foreground='#3b7cd1',background='#f5f6f7',font=("Helvetica",18))
+    LCadastrarVenda.place(x=80, y =45)
+
+
+    # Entrada do id usuario
+    label_campo1 = ttk.Label(FrameMeio, text="ID",font=("Helvetica",10),bootstyle=("INVERSE","LIGHT"))
+    label_campo1.place(x=comecoX,y=comecoY)
+
+    entry_campo1 = ttk.Entry(FrameMeio,width=5)
+    entry_campo1.place(x=comecoX,y=comecoY+paddingTextoY)
+
+
+    # Entrada cpf usuario
+    label_campo2 = ttk.Label(FrameMeio, text="CPF",font=("Helvetica",10),bootstyle=("INVERSE","LIGHT"))
+    label_campo2.place(x=comecoX+paddingCampoX,y=comecoY)
+
+    entry_campo2 = ttk.Entry(FrameMeio,width=15)
+    entry_campo2.place(x=comecoX+paddingCampoX,y=comecoY+paddingTextoY)
+
+    # Entrada Nome usuario
+    label_campo3 = ttk.Label(FrameMeio, text="Nome",font=("Helvetica",10),bootstyle=("INVERSE","LIGHT"))
+    label_campo3.place(x=comecoX+(paddingCampoX*3),y=comecoY)
+
+    entry_campo3 = ttk.Entry(FrameMeio,width=35)
+    entry_campo3.place(x=comecoX+(paddingCampoX*3),y=comecoY+paddingTextoY)
+
+    # Entrada dp id do carro
+
+    label_campo4 = ttk.Label(FrameMeio, text="ID do carro",font=("Helvetica",10),bootstyle=("INVERSE","LIGHT"))
+    label_campo4.place(x=comecoX,y=comecoY+paddingCampoY*3)
+
+    entry_campo4 = ttk.Entry(FrameMeio,width=5)
+    entry_campo4.place(x=comecoX,y=comecoY+paddingCampoY*3+ paddingTextoY)
+
+    #Entrada dp modelo do carro
+
+    label_campo5 = ttk.Label(FrameMeio, text="Modelo do carro",font=("Helvetica",10),bootstyle=("INVERSE","LIGHT"))
+    label_campo5.place(x=comecoX+paddingCampoX,y=comecoY+paddingCampoY*3)
+
+    entry_campo5 = ttk.Entry(FrameMeio,width=15)
+    entry_campo5.place(x=comecoX+paddingCampoX,y=comecoY+paddingCampoY*3+paddingTextoY)
+
+    # Cor do mdelo
+
+    label_campo6 = ttk.Label(FrameMeio, text="Cor",font=("Helvetica",10),bootstyle=("INVERSE","LIGHT"))
+    label_campo6.place(x=comecoX+paddingCampoX*3,y=comecoY+paddingCampoY*3)
+
+    entry_campo6 = ttk.Entry(FrameMeio,width=15)
+    entry_campo6.place(x=comecoX+paddingCampoX*3,y=comecoY+paddingCampoY*3+paddingTextoY)
+
+
+    #Preco
+
+    label_campo6 = ttk.Label(FrameMeio, text="Preco",font=("Helvetica",10),bootstyle=("INVERSE","LIGHT"))
+    label_campo6.place(x=comecoX+paddingCampoX*5,y=comecoY+paddingCampoY*3)
+
+    entry_campo6 = ttk.Entry(FrameMeio,width=23)
+    entry_campo6.place(x=comecoX+paddingCampoX*5,y=comecoY+paddingCampoY*3+paddingTextoY)
+
+    #Quantidade
+
+    label_campo6 = ttk.Label(FrameMeio, text="Quantidade",font=("Helvetica",10),bootstyle=("INVERSE","LIGHT"))
+    label_campo6.place(x=comecoX+paddingCampoX*7+40,y=comecoY+paddingCampoY*3)
+
+    entry_campo6 = ttk.Entry(FrameMeio,width=7)
+    entry_campo6.place(x=comecoX+paddingCampoX*7+40,y=comecoY+paddingCampoY*3+paddingTextoY)
+
+    # Preco modelo
+
+
+
+    # Cor do mdelo
+
+
+
+
+    #----- deletar venda
+
+    LCadastrarVenda = ttk.Label(FrameMeio, text= "Deletar Venda:",foreground='#3b7cd1',background='#f5f6f7',font=("Helvetica",18))
+    LCadastrarVenda.place(x=80, y =240) 
+
+
+    #botao cadastrar e deletar
+
+
+
+
+    # if len(lista)<8:
+    #     ExibePainelMensagemMeio("Favor Preencher todos os campos para cadastro")
+
+
+    const.root.mainloop()
+    return 
+
+
+def cadastrarCliente():
+        # Lógica para abrir a janela de cadastro de clientes
+        print("Opção: Cadastrar Cliente")
+        vCadastroCliente(const.root)
+
+def cadastrarVeiculo():
+        # Lógica para abrir a janela de cadastro de veículo
+        print("Opção: Cadastrar Veículo")
+        vCadastroCarro(const.root)
+
+def CriaMenuPrincipal():
+
+
+
+    #recebe o numero da tela
+
+    frameUsuario=encontraSaidaFrame(const.telaSaida)
+
+    root=const.root
+
+    sm=ttk.Style()
+    sm.configure('custom.TMenubutton', background='red', foreground='white', font=('Helvetica', 24))
+    
+    tmenu = tk.Menu(root)
+    
+    
+    #imagem = PhotoImage(file="img/logo.ico")  
+    # Criar um widget Label com a imagem como fundo
+    #label_fundo = Label(root, image=imagem)
+
+    ##label_fundo = ttk.Label(root,text="LABEL FUNDO")
+    ##label_fundo.pack(anchor=CENTER)
+
+
+    # Opções do menu
+
+    menu_principal = ttk.Menu(tmenu, tearoff=0)
+    menu_principal.add_command(label="Home", command=lambda: trocaFramePrincipali(const.telaSaida))
+    tmenu.add_cascade(label="Home", menu=menu_principal)
+    
+
+    menu_veiculo = ttk.Menu(tmenu, tearoff=0)
+    menu_veiculo.add_command(label="Consultar Veículo", command=consultarVeiculo)
+    menu_veiculo.add_command(label="Cadastrar Veículo", command= cadastrarVeiculo)
+    tmenu.add_cascade(label="Veículo", menu=menu_veiculo)
+
+    menu_clientes = ttk.Menu(tmenu, tearoff=0)
+    menu_clientes.add_command(label="Consultar Clientes", command=consultarClientes)
+    menu_clientes.add_command(label="Cadastrar Cliente", command=cadastrarCliente)
+    tmenu.add_cascade(label="Clientes", menu=menu_clientes)
+
+
+    menu_vendas = ttk.Menu(tmenu, tearoff=0)
+    menu_vendas.add_command(label="Vendas", command=lambda:trocaFrameVenda(frameUsuario))
+    tmenu.add_cascade(label="Vendas", menu=menu_vendas)
+
+
+
+    root.config(menu=tmenu)
 
     return 
 
@@ -98,16 +285,14 @@ def vConsultaCarros(root):
             detalhes_registro = f"ID: {registro[0]} Chassi: {registro[1]} Cor: {registro[2]} Km: {registro[3]} Ano: {registro[4]} Modelo: {registro[5]} Custo: {registro[6]} Preço: {registro[7]} Quantidade: {registro[8]}"
             label_detalhes = Label(frame_registro, text=detalhes_registro)
             label_detalhes.pack(side=LEFT)
-        
-
-
+    
 
     #Definindo nova janela TopLevel
     janelaConsulta = Toplevel(root)
     janelaConsulta.grab_set()
     janelaConsulta.title("BRUTUS - Consulta de veículos")
-    janelaConsulta.geometry("1200x700")
-    janelaConsulta.resizable(False,False)
+    # janelaConsulta.geometry("1200x700")
+    # janelaConsulta.resizable(False,False)
 
     # Label e campo de pesquisa por modelo
     label_modelo = Label(janelaConsulta, text="Modelo:")
@@ -149,10 +334,12 @@ def vConsultaCarros(root):
     button_pesquisar = Button(janelaConsulta, text="Pesquisar", command=pesquisar) #clique no botao executa
     button_pesquisar.pack()
 
+    # Iniciar a janela principal
+    const.root.mainloop()
     return 
 
 def vConsultaClientes(root):
-    
+
     def pesquisar():
         nome = entry_nome.get()
         idade = entry_idade.get()
@@ -191,8 +378,7 @@ def vConsultaClientes(root):
             detalhes_registro = f"ID: {registro[0]} Nome: {registro[1]} Idade: {registro[2]} CPF: {registro[3]} Endereço: {registro[4]} Cidade: {registro[5]}CEP: {registro[6]}\nTelefone: {registro[7]} Email: {registro[8]} Sexo: {registro[8]} Compras Feitas: {registro[8]}"
             label_detalhes = Label(frame_registro, text=detalhes_registro)
             label_detalhes.pack(side=LEFT)
-        
-
+    
     #Definindo nova janela TopLevel
     janelaConsulta = Toplevel(root)
     janelaConsulta.grab_set()
@@ -242,11 +428,14 @@ def vConsultaClientes(root):
 
     # Iniciar a janela principal
     #root.mainloop()
+
     return 
 
 def vLogin(root):
 
     global FrameTotalLogin
+    
+
     paddingtextoY= 29
     paddingelementoY = 50
     comecoX = 508
@@ -254,6 +443,7 @@ def vLogin(root):
 
 
     FrameTotalLogin = ttk.Frame(root,height=700,width=1200)
+    const.FrameTotalLogin = FrameTotalLogin
     FrameTotalLogin.pack()
 
 
@@ -481,88 +671,57 @@ def vCadastroCarro(root):
 
     return
 
-def janelaPrincipal(root):
 
-    global FrameTotalPrincipal
+
+def consultarClientes():
+    # Lógica para abrir a janela de consulta de clientes
+    print("Opção: Consultar Clientes")
+    vConsultaClientes(const.root)
+
+def consultarVeiculo():
+     # Lógica para abrir a janela de consulta de veículo
+    print("Opção: Consultar Veículo")
+    vConsultaCarros(const.root)
+
+
+def exibir_opcao(opcao):
+    label_opcao.config(text=f"Opção selecionada: {opcao}")
+
+def ExibePainelMensagemMeio(mensagem):
+
+    msgframe= ttk.Frame(const.root,height=200,width=300)
+    msgframe.place(x=492,y=260)
+    md = ttk.dialogs.dialogs.MessageDialog(f"{mensagem}",buttons=['OK'],parent=msgframe)
+    md.show()
+    msgframe.destroy()
+    msgframe.hidden=0
+
+
+def janelaPrincipal(root):
+    #const.telaSaida=0
+    #global FrameTotalPrincipal
     FrameTotalPrincipal = ttk.Frame(root,height=700,width=1200)
+    const.FrameTotalPrincipal=FrameTotalPrincipal
+
+
     FrameTotalPrincipal.pack()
 
     # raiz = Toplevel(root)
     # raiz.geometry(f"1200x700+{root.winfo_x()}+{root.winfo_y()}")
 
-    msgframe= ttk.Frame(root,height=200,width=300)
-    msgframe.place(x=492,y=260)
-
-    md = ttk.dialogs.dialogs.MessageDialog("Bem vindo Admin",buttons=['OK'],parent=msgframe)
-    md.show()
-    msgframe.destroy()
-    msgframe.hidden=0
-    ## criacao ---------
-
-    def consultarClientes():
-        # Lógica para abrir a janela de consulta de clientes
-        print("Opção: Consultar Clientes")
-        vConsultaClientes(root)
-
-    def consultarVeiculo():
-         # Lógica para abrir a janela de consulta de veículo
-        print("Opção: Consultar Veículo")
-        vConsultaCarros(root)
-
-    def cadastrarCliente():
-        # Lógica para abrir a janela de cadastro de clientes
-        print("Opção: Cadastrar Cliente")
-        vCadastroCliente(root)
-
-    def cadastrarVeiculo():
-        # Lógica para abrir a janela de cadastro de veículo
-        print("Opção: Cadastrar Veículo")
-        vCadastroCarro(root)
-
-    # Função para exibir a opção selecionada
-    def exibir_opcao(opcao):
-            opcao.config(text=f"Opção selecionada: {opcao}")
+   
+    print("Pagina saida %d",const.telaSaida)
+    if const.telaSaida==0 or const.telaSaida==-1:
+        ExibePainelMensagemMeio("Bem vindo Admin.")
 
 
-    # Barra de navegação
 
-    sm=ttk.Style()
-    sm.configure('custom.TMenubutton', background='red', foreground='white', font=('Helvetica', 24))
+    ## criacao  Menu ---------
+    const.telaSaida=1
+    CriaMenuPrincipal() # passando a tela atual
+
+
     
-    tmenu = tk.Menu(root)
-    
-    
-    #imagem = PhotoImage(file="img/logo.ico")  
-    # Criar um widget Label com a imagem como fundo
-    #label_fundo = Label(root, image=imagem)
-
-    ##label_fundo = ttk.Label(root,text="LABEL FUNDO")
-    ##label_fundo.pack(anchor=CENTER)
-
-
-    # Opções do menu
-    
-
-    menu_veiculo = ttk.Menu(tmenu, tearoff=0)
-    menu_veiculo.add_command(label="Consultar Veículo", command=consultarVeiculo)
-    menu_veiculo.add_command(label="Cadastrar Veículo", command= cadastrarVeiculo)
-    tmenu.add_cascade(label="Veículo", menu=menu_veiculo)
-
-    menu_clientes = ttk.Menu(tmenu, tearoff=0)
-    menu_clientes.add_command(label="Consultar Clientes", command=consultarClientes)
-    menu_clientes.add_command(label="Cadastrar Cliente", command=cadastrarCliente)
-    tmenu.add_cascade(label="Clientes", menu=menu_clientes)
-
-
-
-
-    root.config(menu=tmenu)
-
-    # Label para exibir a opção selecionada
-    #label_opcao = ttk.Label(root, text="Opção selecionada:")
-    #label_opcao.pack()
-
-
 
     #---- Iniciar a construcao da janela principal do meio com informacoes
     
@@ -571,17 +730,18 @@ def janelaPrincipal(root):
     # s.configure('SB.TFrame',background="#3b7cd1")
     # s.configure('Frame1.TFrame', background='#3g7cd1')
 
+    
     global valorVenda
 
     sf = ttk.Style()
     sf.configure('TFrame')
     sf.configure('SB.TFrame',background='#f5f6f7')
 
-    FrameTopo = ttk.Frame(FrameTotalPrincipal,height=180,width=730,style='SB.TFrame') #height=160,width=730
+    FrameTopo = ttk.Frame(const.FrameTotalPrincipal,height=180,width=730,style='SB.TFrame') #height=160,width=730
     FrameTopo.place(x=230, y =80)
     #bootstyle=("iNVERSE","light")
 
-    LTotalVenda = ttk.Label(FrameTotalPrincipal, text= "Total de vendas:",foreground='#3b7cd1',background='#f5f6f7',font=("Helvetica",22))
+    LTotalVenda = ttk.Label(const.FrameTotalPrincipal, text= "Total de vendas:",foreground='#3b7cd1',background='#f5f6f7',font=("Helvetica",22))
     LTotalVenda.place(x=300, y =150)
 
 
@@ -592,16 +752,14 @@ def janelaPrincipal(root):
 
     #print(p2)
 
-    LValorVenda = ttk.Label(FrameTotalPrincipal, text= f'{fvalorVenda}',background='#f5f6f7',font=("Helvetica",22))
+    LValorVenda = ttk.Label(const.FrameTotalPrincipal, text= f'{fvalorVenda}',background='#f5f6f7',font=("Helvetica",22))
     LValorVenda.place(x=700, y =150)
-
-
 
 
     load1 =ttk.PhotoImage(name='maintopo',file=PATH / 'imgprincipalmeiotopo.png')
     load1= load1.subsample(4)
 
-    icontopo=Label(FrameTotalPrincipal,image=load1)
+    icontopo=Label(const.FrameTotalPrincipal,image=load1)
     icontopo.place(x=145,y=75)
 
     load2=ttk.PhotoImage(name='mainbaixo',file=PATH / 'imgprincipalmeiobaixo.png')
@@ -612,33 +770,142 @@ def janelaPrincipal(root):
 
 
 
-    FrameBaixo = ttk.Frame(FrameTotalPrincipal,height=280,width=730,style="SB.TFrame") #height=160,width=730
+    FrameBaixo = ttk.Frame(const.FrameTotalPrincipal,height=280,width=730,style="SB.TFrame") #height=160,width=730
     FrameBaixo.place(x=230, y =320)
 
-    LVendedores = ttk.Label(FrameTotalPrincipal, text= "Vendedores",foreground='#3b7cd1',background='#f5f6f7',font=("Helvetica",14))
+    LVendedores = ttk.Label(const.FrameTotalPrincipal, text= "Vendedores",foreground='#3b7cd1',background='#f5f6f7',font=("Helvetica",14))
     LVendedores.place(x=300, y =355)
 
     lvendedores=ctrl.ConsultaVendedores()
     montaTabela(280,410,lvendedores)
 
 
+    const.root.mainloop()
+
+    return 
+
+def testeJanelas(root,janela):
+
+
+    ## criacao  Menu ---------
+    FrameTotalPrincipal = ttk.Frame(root,height=700,width=1200)
+    const.FrameTotalPrincipal=FrameTotalPrincipal
+    FrameTotalPrincipal.pack()
+
+
+    const.telaSaida=0
+
+    #CriaMenuPrincipal() # passando a tela atual
+    
+    if janela==5:
+        trocaFrameVenda(const.FrameTotalPrincipal)
 
 
 
     const.root.mainloop()
 
-    return 
+
+    return
 
 def ExibeStatusLoginSucesso(ntext):
     label_result.config(text=ntext)
     return
 
-def trocaFramePrincipal():
 
-    ExibeStatusLoginSucesso("Usuario Validado")
+def trocaFrameVenda(frame):
 
-    FrameTotalLogin.pack_forget()   #ok
-    janelaPrincipal(const.root)
+  
+    try:
+        frame.pack_forget()
+    except:
+        print("Erro ao encontrar o frame de saida da troca de janela")
+        return
+
+    vVendas(const.root)
+    return 
+
+def trocaFrameCadastrarVenda():
+
+    frame = encontraSaida
+    try:
+        frame.pack_forget()
+    except:
+        print("Erro ao encontrar o frame de saida da troca de janela")
+
+    vVenda(const.root)
+    return 
+
+def trocaFrameCsonsultarVenda():
+
+    frame = encontraSaida
+    try:
+        frame.pack_forget()
+    except:
+        print("Erro ao encontrar o frame de saida da troca de janela")
+
+    vVenda(const.root)
+    return 
+
+def encontraSaidaFrame(isaida):
+    # recebe o ido frame
+    #retorna o frame do usuario
+
+    if isaida == 0: #login
+        print("Estou vindo da tela 0 - Login")
+        return const.FrameTotalLogin
+
+    if isaida == 1: # cadastro principal
+        print("Estou vindo da tela 1 - Principal")
+        return const.FrameTotalPrincipal
+    if isaida == 2:  # consulta veiculos
+        print("Estou vindo da tela 2")
+        return 
+
+    if isaida == 3:  # cadastro carros
+        print("Estou vindo da tela 3")
+        return 
+
+    if isaida == 5:  # consulta carros
+        print("Estou vindo da tela 4")
+        return 
+
+    if isaida == 0: #vendas
+        print("Estou vindo da tela 5")
+        return 
+
+    return 
+
+def trocaFramePrincipali(saida): #apaga a tela passada 
+    
+    if saida==0: # vindo do login
+
+        ExibeStatusLoginSucesso("Usuario Validado")
+        frame=const.FrameTotalLogin  #ok vindo do login
+        frame.pack_forget() 
+        janelaPrincipal(const.root)
+
+    elif saida==1: # vindo do principal, dela mesma
+        #recarrega para atualizar
+        print("Recarreguei - Saindo de principal")
+        return
+
+    elif saida==3:
+        
+        return 
+
+    elif saida==4:  
+        return 
+    
+    elif saida==5:  
+        print("Saindo de Vendas")
+        frame=const.FrameTotalVendas
+        frame.pack_forget() 
+        janelaPrincipal(const.root)
+
+        return 
+
+    else:
+        return 
 
     return 
 
@@ -647,20 +914,6 @@ def ExibeStatusLogin(ntext):
     label_result.config(text=ntext)
     
     return
-
-def MainView(root):
-
-    
-    #print("Tela de Login criada : 1")
-    
-    vLogin(root)
-   
-    
-    
-
-
-
-    return 
 
 def Mensagem(cod):
 
@@ -735,4 +988,20 @@ def Mensagem(cod):
 
     if cod == 23:
         messagebox.showinfo("Erro","Quantiade deve ser um número inteiro.")
+
+
+
+
+def MainView(root):
+
+
+    #print("Tela de Login criada : 1")
+    
+    vLogin(root)
+
+    return 
+
+
+
+
 

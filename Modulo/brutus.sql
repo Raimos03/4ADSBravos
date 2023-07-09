@@ -216,7 +216,7 @@ INSERT INTO `usuarios` (`id`, `login`, `senha`,`nome`,`sobrenome`,`conta`) VALUE
 
 DROP TABLE IF EXISTS `vendas`;
 CREATE TABLE IF NOT EXISTS  `vendas`  (
-    `idvenda` int NOT NULL UNIQUE,
+    `idvenda` int NOT NULL UNIQUE AUTO_INCREMENT,
     `idcliente` int(11) NOT NULL ,
     `nome` text,
     `cpf` text NOT NULL,
